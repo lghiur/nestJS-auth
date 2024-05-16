@@ -8,9 +8,13 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
 
   createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
-      type: 'sqlite',
-      synchronize: false,
+      type: 'postgres',
+      host: this.configService.get<string>('DB_HOST'),
+      port: parseInt(this.configService.get<string>('DB_PORT')),
+      username: this.configService.get<string>('DB_USER'),
+      password: this.configService.get<string>('DB_PASSWORD'),
       database: this.configService.get<string>('DB_NAME'),
+      synchronize: false,
       autoLoadEntities: true,
     };
   }
